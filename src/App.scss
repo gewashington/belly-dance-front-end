@@ -1,0 +1,33 @@
+.container-wrapper {
+    display: flex;
+    flex-direction: column;
+    
+}
+.container {
+    margin-top: 12px;
+    height: 75%;
+    max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dropdown-container {
+    display: flex;
+    min-width: 16%;
+    justify-content: space-between;
+}
+
+.card {
+    width: 40%;
+    margin: 0 12px 12px 0;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button {
+    margin-top: 12px;
+    margin-right: 12px;
+}
