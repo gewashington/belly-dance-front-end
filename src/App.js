@@ -13,21 +13,29 @@ Navbar,
 NavbarBrand,
 UncontrolledDropdown,
 } from 'reactstrap';
-import {ModalTemplate} from './components/Modals/ModalTemplate';
 
+import AddDanceModal from './components/Modals/AddDanceMoveModal';
 import EditDanceMoveModal from './components/Modals/EditDanceMoveModal';
+import DeleteModal from './components/Modals/DeleteModal';
 
 import './App.scss'
+
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
      this.state = {
        danceMoveList: [],
      }
-     this.handleEdit = this.handleEdit.bind(this)
+     this.handleEditDanceMove = this.handleEditDanceMove.bind(this)
+     this.handleDeleteDanceMove = this.handleDeleteDanceMove.bind(this);
   }
   
   componentDidMount() {
+    this.setState({
+      addModalOpen: false,
+      deleteDanceModalOpen: false,
+    })
     this.refreshList()
   }
 
@@ -36,6 +44,30 @@ export default class App extends React.Component {
     .get("http://localhost:8000/api/dancemoves/")
     .then(res => this.setState({ danceMoveList: res.data }))
     .catch(err => console.log(err));
+  }
+
+  handleDeleteDanceMove(id) {
+    console.log('Delete clicked')
+    console.log('Id: ', id)
+    //Takes in dance move id and deletes based on Django delete
+    axios
+    .delete(`http://localhost:8000/api/dancemoves/${id}`)
+    .then(res => this.refreshList());
+  }
+
+  handleEditDanceMove(danceMove) {
+    console.log('Dance move updated: ', danceMove)
+    if (danceMove.id) {
+      axios
+        .put(`http://localhost:8000/api/dancemoves/${danceMove.id}/`, danceMove)
+        .then(res => this.refreshList());
+      return;
+    }
+    else {
+      axios
+        .post("http://localhost:8000/api/dancemoves/", danceMove)
+        .then(res => this.refreshList());
+    }
   }
 
   renderCard(danceMove) {
@@ -55,14 +87,10 @@ export default class App extends React.Component {
                 </Button>
               </div>
               <div className="button">
-                <EditDanceMoveModal danceMove={danceMove} onSave={this.handleEdit} label={`Edit`} />
+                <EditDanceMoveModal danceMove={danceMove} onSave={this.handleEditDanceMove} label={`Edit`} />
               </div>
               <div className="button">
-                <Button 
-                  onClick={() => this.handleDelete(danceMove.id)}
-                >
-                  Delete
-                </Button>
+                {this.renderDeleteDanceModal(danceMove)}
               </div>
             </div>
           </CardBody>
@@ -71,42 +99,59 @@ export default class App extends React.Component {
     )
   }
 
-  handleDelete(id) {
-    console.log('Delete clicked')
-    console.log('Id: ', id)
-    //Takes in dance move id and deletes based on Django delete
-    axios
-    .delete(`http://localhost:8000/api/dancemoves/${id}`)
-    .then(res => this.refreshList());
-  }
-
   handleAddToRoutineButton() {
     //Will open modal to add to a routine 
     console.log('Add to Routine Button Clicked')
   }
 
-  handleEdit(danceMove) {
-    console.log('Dance move updated: ', danceMove)
-    if (danceMove.id) {
-      axios
-        .put(`http://localhost:8000/api/dancemoves/${danceMove.id}/`, danceMove)
-        .then(res => this.refreshList());
-      return;
-    }
-    // axios
-    //   .post("http://localhost:8000/api/dancemoves/", danceMove)
-    //   .then(res => this.refreshList());
-  }
-
-
   renderAddModal() {
+    let open = () => {
+      console.log('Add Model Opened')
+      this.setState({addModalOpen: true})
+    }
+
+    let close = () => {
+      this.setState({addModalOpen: false})
+      this.refreshList()
+    }
+
     return(
       <React.Fragment>
-        <DropdownItem onClick={ModalTemplate.open('add-move-modal')}>Add Move</DropdownItem>
-        <ModalTemplate id="add-move-modal">
+        <DropdownItem onClick={open}>Add Move</DropdownItem>
+        <AddDanceModal 
+          isOpen={this.state.addModalOpen} 
+          close={close} 
+          onSave={this.handleEditDanceMove}
+          label={'Add '}
+          />
+        {/* <ModalTemplate id="add-move-modal" isOpen={this.state.addModalOpen}>
           Testing this method
-          <Button onClick={ModalTemplate.close('add-move-modal')}>Close</Button>
-        </ModalTemplate>
+          <Button onClick={close}>Close</Button>
+        </ModalTemplate> */}
+      </React.Fragment>
+    )
+  }
+
+  renderDeleteDanceModal(danceMove) {
+    let open = () => {
+      console.log('Delete Dance Moodal rendered')
+      this.setState({deleteDanceModalOpen: true})
+    }
+  
+    let close = () => {
+      this.setState({deleteDanceModalOpen: false})
+    }
+
+    return(
+      <React.Fragment>
+        <Button onClick={open}>Delete</Button>
+        <DeleteModal 
+          isOpen={this.state.deleteDanceModalOpen} 
+          close={close} 
+          onDelete={this.handleDeleteDanceMove}
+          label={danceMove.name}
+          id={danceMove.id}
+          />
       </React.Fragment>
     )
   }

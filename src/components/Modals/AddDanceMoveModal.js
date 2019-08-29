@@ -12,7 +12,7 @@ import {
   } from "reactstrap";
 
 
-export default class EditDanceMoveModal extends React.Component {
+export default class AddDanceMoveModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,49 +21,48 @@ export default class EditDanceMoveModal extends React.Component {
           description: '',
           direction: null,
         },
-
-        modal: false,
+        // isOpen: false,
     }
 
-    this.toggle = this.toggle.bind(this);
+    // this.toggle = this.toggle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    if(this.props.danceMove) {
-      this.setState({
-        danceMove: this.props.danceMove
-      })
-    }
-  }
+//   componentDidMount() {
+//       this.setState({
+//         isOpen: this.props.isOpen
+//       })
+//   }
 
   handleChange = e => {
     const danceMove = { ...this.state.danceMove, [e.target.name]: e.target.value}
+    console.log(e)
     this.setState({
         danceMove
     })
   }
 
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
+//   toggle() {
+//     this.setState({
+//         isOpen: !this.state.isOpen,
+//     })
+//   }
 
   handleSave(updatedDanceMove) {
     this.props.onSave(updatedDanceMove)
-    this.toggle();
+    this.props.close();
   }
 
   render() {
-    const { danceMove, modal } = this.state;
-    const { label } = this.props;
-    // const { label, modal, toggle } this.props;
-
+      // const { isOpen, close } = this.props;
+    const { danceMove } = this.state;
+    const { label, close, isOpen }  = this.props;
+    console.log('Dance Move', danceMove)
+      
     return (
       <React.Fragment>
-        <Button onClick={this.toggle}>{label}</Button>
-        <Modal isOpen={modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>{label}</ModalHeader>
+        <Modal isOpen={isOpen} toggle={close}>
+          <ModalHeader toggle={close}>{label}</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>

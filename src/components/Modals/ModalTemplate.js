@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ModalTemplateContainer} from './ModalTemplateContainer';
 import './styles/ModalTemplate.scss';
 
 const propTypes = {
@@ -7,27 +8,27 @@ const propTypes = {
 };
 
 class ModalTemplate extends React.Component {
-    static modals = [];
+    // static modals = [];
 
-    static open = (id) => (e) => {
-        console.log(id)
-        e.preventDefault();
+    // static open = (id) => (e) => {
+    //     console.log(id)
+    //     e.preventDefault();
 
-        // open modal specified by id
-        let modal = ModalTemplate.modals.find(x => x.props.id === id);
-        modal.setState({ isOpen: !modal.state.issOpen }, console.log('Modal:', modal));
-        // console.log(modal)
-        document.body.classList.add('modal-template-open');
-    }
+    //     // open modal specified by id
+    //     let modal = ModalTemplate.modals.find(x => x.props.id === id);
+    //     modal.setState({ isOpen: !modal.state.issOpen }, console.log('Modal:', modal));
+    //     // console.log(modal)
+    //     document.body.classList.add('modal-template-open');
+    // }
 
-    static close = (id) => (e) => {
-        e.preventDefault();
+    // static close = (id) => (e) => {
+    //     e.preventDefault();
 
-        // close modal specified by id
-        let modal = ModalTemplate.modals.find(x => x.props.id === id);
-        modal.setState({ isOpen: false });
-        document.body.classList.remove('modal-template-open');
-    }
+    //     // close modal specified by id
+    //     let modal = ModalTemplate.modals.find(x => x.props.id === id);
+    //     modal.setState({ isOpen: false });
+    //     document.body.classList.remove('modal-template-open');
+    // }
 
     constructor(props) {
         super(props);
@@ -42,25 +43,29 @@ class ModalTemplate extends React.Component {
         document.body.appendChild(this.element);
 
         // add this modal instance to the modal service so it's accessible from other components
-        ModalTemplate.modals.push(this);
+        console.log('Modal List Before CDM', ModalTemplateContainer.modals)
+        ModalTemplateContainer.modals.push(this);
+        console.log('Modal List After CDM', ModalTemplateContainer.modals)
+
     }
 
     componentWillUnmount() {
         // remove this modal instance from modal service
-        ModalTemplate.modals = ModalTemplate.modals.filter(x => x.props.id !== this.props.id);
+        ModalTemplateContainer.modals = ModalTemplateContainer.modals.filter(x => x.props.id !== this.props.id);
         this.element.remove();
     }
-
+    
     handleClick(e) {
         // close modal on background click
         if (e.target.className === 'modal-template') {
-            ModalTemplate.close(this.props.id)(e);
+            console.log('Handle Close Click Works', this.props.id, e)
+            ModalTemplateContainer.close(this.props.id)(e);
         }
     }
-    
+
     render() {
         return (
-            <div style={{display: + this.state.isOpen ? '' : 'none'}} onClick={this.handleClick} ref={el => this.element = el}>
+            <div className={`${this.props.id}`} style={{display: + this.props.isOpen ? '' : 'none'}} onClick={this.handleClick} ref={el => this.element = el}>
                 <div className="modal-template">
                     <div className="modal-template-body">
                         {this.props.children}
