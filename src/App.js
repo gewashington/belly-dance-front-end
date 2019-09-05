@@ -49,9 +49,9 @@ export default class App extends React.Component {
   handleDeleteDanceMove(id) {
     console.log('Delete clicked')
     console.log('Id: ', id)
-    //Takes in dance move id and deletes based on Django delete
+    // Takes in dance move id and deletes based on Django delete
     axios
-    .delete(`http://localhost:8000/api/dancemoves/${id}`)
+    .delete(`http://localhost:8000/api/dancemoves/${id}`) 
     .then(res => this.refreshList());
   }
 
