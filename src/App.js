@@ -4,11 +4,6 @@ import axios from 'axios';
 import Randomizer from './components/Randomizer';
 import BellyDancemoveList from './components/BellyDanceMoveList';
 import { 
-Button, 
-Card, 
-CardBody,
-CardTitle, 
-CardText, 
 DropdownItem,
 DropdownToggle,
 DropdownMenu,
@@ -18,9 +13,6 @@ UncontrolledDropdown,
 } from 'reactstrap';
 
 import AddDanceModal from './components/Modals/AddDanceMoveModal';
-import EditDanceMoveModal from './components/Modals/EditDanceMoveModal';
-import DeleteModal from './components/Modals/DeleteModal';
-
 import './App.scss'
 
 
