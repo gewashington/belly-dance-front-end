@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import Randomizer from './components/Randomizer';
+import BellyDancemoveList from './components/BellyDanceMoveList';
 import { 
 Button, 
 Card, 
@@ -27,15 +30,14 @@ export default class App extends React.Component {
      this.state = {
        danceMoveList: [],
      }
-     this.handleEditDanceMove = this.handleEditDanceMove.bind(this)
-     this.handleDeleteDanceMove = this.handleDeleteDanceMove.bind(this);
+     this.handleSaveDanceMove = this.handleSaveDanceMove.bind(this)
   }
   
   componentDidMount() {
-    this.setState({
-      addModalOpen: false,
-      deleteDanceModalOpen: false,
-    })
+    // this.setState({
+    //   addModalOpen: false,
+    //   deleteDanceModalOpen: false,
+    // })
     this.refreshList()
   }
 
@@ -46,57 +48,10 @@ export default class App extends React.Component {
     .catch(err => console.log(err));
   }
 
-  handleDeleteDanceMove(id) {
-    console.log('Delete clicked')
-    console.log('Id: ', id)
-    // Takes in dance move id and deletes based on Django delete
-    axios
-    .delete(`http://localhost:8000/api/dancemoves/${id}`) 
-    .then(res => this.refreshList());
-  }
-
-  handleEditDanceMove(danceMove) {
-    console.log('Dance move updated: ', danceMove)
-    if (danceMove.id) {
-      axios
-        .put(`http://localhost:8000/api/dancemoves/${danceMove.id}/`, danceMove)
-        .then(res => this.refreshList());
-      return;
-    }
-    else {
+  handleSaveDanceMove(danceMove) {
       axios
         .post("http://localhost:8000/api/dancemoves/", danceMove)
         .then(res => this.refreshList());
-    }
-  }
-
-  renderCard(danceMove) {
-    return(
-        <Card key={danceMove.id}>
-          <CardTitle>{danceMove.name}</CardTitle>
-          <CardBody>
-            <CardText>
-              {danceMove.description ? danceMove.description : 'No description available'}
-            </CardText>
-            <div className="button-container">
-              <div className="button">
-                <Button 
-                  onClick={this.handleAddToRoutineButton}
-                >
-                  Add To Routine
-                </Button>
-              </div>
-              <div className="button">
-                <EditDanceMoveModal danceMove={danceMove} onSave={this.handleEditDanceMove} label={`Edit`} />
-              </div>
-              <div className="button">
-                {this.renderDeleteDanceModal(danceMove)}
-              </div>
-            </div>
-          </CardBody>
-        </Card>
-
-    )
   }
 
   handleAddToRoutineButton() {
@@ -121,37 +76,13 @@ export default class App extends React.Component {
         <AddDanceModal 
           isOpen={this.state.addModalOpen} 
           close={close} 
-          onSave={this.handleEditDanceMove}
+          onSave={this.handleSaveDanceMove}
           label={'Add '}
           />
         {/* <ModalTemplate id="add-move-modal" isOpen={this.state.addModalOpen}>
           Testing this method
           <Button onClick={close}>Close</Button>
         </ModalTemplate> */}
-      </React.Fragment>
-    )
-  }
-
-  renderDeleteDanceModal(danceMove) {
-    let open = () => {
-      console.log('Delete Dance Moodal rendered')
-      this.setState({deleteDanceModalOpen: true})
-    }
-  
-    let close = () => {
-      this.setState({deleteDanceModalOpen: false})
-    }
-
-    return(
-      <React.Fragment>
-        <Button onClick={open}>Delete</Button>
-        <DeleteModal 
-          isOpen={this.state.deleteDanceModalOpen} 
-          close={close} 
-          onDelete={this.handleDeleteDanceMove}
-          label={danceMove.name}
-          id={danceMove.id}
-          />
       </React.Fragment>
     )
   }
@@ -170,6 +101,9 @@ export default class App extends React.Component {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
+                  <Link to="/">View List</Link>
+                </DropdownItem>
+                <DropdownItem>
                   Find Move 
                 </DropdownItem>
                 {this.renderAddModal()}
@@ -184,16 +118,20 @@ export default class App extends React.Component {
                   View Routines
                 </DropdownItem>
                 <DropdownItem>
-                  Create Routine
+                  <Link to="randomizer">Create Random Routine</Link>
                 </DropdownItem>
+                
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
         </Navbar>
         <div className="container">
-            {this.state.danceMoveList.map((danceMove) => 
-              this.renderCard(danceMove)
-            )}
+            <React.Fragment>
+              <Switch>
+                <Route exact path="/" component={BellyDancemoveList}/>
+                <Route path="/randomizer" component={Randomizer} />`
+              </Switch>
+            </React.Fragment>
         </div>
       </div>
     );
