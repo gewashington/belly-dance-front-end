@@ -41,11 +41,13 @@ export default class DanceRandomizer extends React.Component {
 
     onRandomizeClick() {
         //Note: If you console log state right after clicking, it will not render correctly since setState is async
-        const { danceMoveList, number } = this.state
+        const { danceMoveList, number, randomizedDanceList } = this.state
+
         let updatedRandomizedDanceList = randomizeList(danceMoveList).slice(0, number)
         this.setState({
             randomizedDanceList: updatedRandomizedDanceList,
         })
+        console.log(randomizedDanceList)
     }
 
     renderForm() {

@@ -1,18 +1,14 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import DanceRandomizer from './components/DanceRandomizer';
-import BellyDancemoveList from './components/BellyDanceMoveList';
-import { 
-DropdownItem,
-DropdownToggle,
-DropdownMenu,
-Navbar,
-NavbarBrand,
-UncontrolledDropdown,
-} from 'reactstrap';
+import { Route, Switch } from 'react-router-dom';
+import { DropdownItem } from 'reactstrap';
 
 import AddDanceModal from './components/Modals/AddDanceMoveModal';
+import BellyDancemoveList from './components/BellyDanceMoveList';
+import DanceRandomizer from './components/DanceRandomizer';
+import NavBar from './components/NavBar';
+
+
 import './App.scss'
 
 
@@ -22,7 +18,8 @@ export default class App extends React.Component {
      this.state = {
        danceMoveList: [],
      }
-     this.handleSaveDanceMove = this.handleSaveDanceMove.bind(this)
+     this.handleSaveDanceMove = this.handleSaveDanceMove.bind(this);
+     this.renderAddModal = this.renderAddModal.bind(this);
   }
   
   componentDidMount() {
@@ -44,11 +41,6 @@ export default class App extends React.Component {
       axios
         .post("http://localhost:8000/api/dancemoves/", danceMove)
         .then(res => this.refreshList());
-  }
-
-  handleAddToRoutineButton() {
-    //Will open modal to add to a routine 
-    console.log('Add to Routine Button Clicked')
   }
 
   renderAddModal() {
@@ -82,35 +74,7 @@ export default class App extends React.Component {
   render() {
     return(
       <div className="container-wrapper">
-        <Navbar color="light">
-          <NavbarBrand>
-            Belly Dance Moves
-          </NavbarBrand> 
-          <div className="dropdown-container">
-            <UncontrolledDropdown >
-              <DropdownToggle>
-                Dance Moves
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <Link to="/">View List</Link>
-                </DropdownItem>
-                {this.renderAddModal()}
-              </DropdownMenu>
-            </UncontrolledDropdown>
-            <UncontrolledDropdown >
-              <DropdownToggle>
-                Routines
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <Link to="randomizer">Create Random Routine</Link>
-                </DropdownItem>
-                
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </div>
-        </Navbar>
+        <NavBar renderAddModal={this.renderAddModal} />
         <div className="container">
             <React.Fragment>
               <Switch>
