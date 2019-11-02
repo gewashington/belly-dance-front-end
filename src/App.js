@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import Randomizer from './components/Randomizer';
+import DanceRandomizer from './components/DanceRandomizer';
 import BellyDancemoveList from './components/BellyDanceMoveList';
 import { 
 DropdownItem,
@@ -121,7 +121,7 @@ export default class App extends React.Component {
             <React.Fragment>
               <Switch>
                 <Route exact path="/" component={BellyDancemoveList}/>
-                <Route path="/randomizer" component={Randomizer} />`
+                <Route path="/randomizer" component={DanceRandomizer} />`
               </Switch>
             </React.Fragment>
         </div>
