@@ -1,12 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { Button, FormGroup, Input, Label, Table } from 'reactstrap';
-import { randomizeList } from '../utils/helpers';
+import { randomizeList, generateRepititions } from '../utils/helpers';
 /*
-TODO:
-- Generate keys and order number for each table row
-TODO:
-- Randomize number between 1 - 4 for Repititions 
+TODO: Allow user to enter any number of moves. This would reuse certain moves.
 */
 
 export default class DanceRandomizer extends React.Component {
@@ -84,13 +81,13 @@ export default class DanceRandomizer extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {randomizedDanceList.map((danceMove => (
+                    {randomizedDanceList.map((danceMove, index) => (
                             <tr key={danceMove.id}>
-                                <th scope="row">1</th>
+                                <th scope="row">{index + 1}</th>
                                 <td>{danceMove.name}</td>
-                                <td>5</td>
+                                <td>{generateRepititions()}</td>
                             </tr>
-                    )))}
+                    ))}
                 </tbody>
             </Table>
         )
