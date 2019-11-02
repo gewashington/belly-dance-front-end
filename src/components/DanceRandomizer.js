@@ -4,6 +4,7 @@ import { Button, FormGroup, Input, Label, Table } from 'reactstrap';
 import { randomizeList, generateRepititions } from '../utils/helpers';
 /*
 TODO: Allow user to enter any number of moves. This would reuse certain moves.
+TODO: Allow user to delete move from list.
 */
 
 export default class DanceRandomizer extends React.Component {

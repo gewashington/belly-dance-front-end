@@ -95,9 +95,6 @@ export default class App extends React.Component {
                 <DropdownItem>
                   <Link to="/">View List</Link>
                 </DropdownItem>
-                <DropdownItem>
-                  Find Move 
-                </DropdownItem>
                 {this.renderAddModal()}
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -106,9 +103,6 @@ export default class App extends React.Component {
                 Routines
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  View Routines
-                </DropdownItem>
                 <DropdownItem>
                   <Link to="randomizer">Create Random Routine</Link>
                 </DropdownItem>

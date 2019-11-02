@@ -4,6 +4,9 @@ import EditDanceMoveModal from './Modals/EditDanceMoveModal';
 import DeleteModal from './Modals/DeleteModal';
 import './styles/BellyDanceMoveList.scss'
 
+/*
+! Fix Delete Move Function
+*/
 
 import { 
     Button, 

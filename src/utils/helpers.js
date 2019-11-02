@@ -19,7 +19,7 @@ export function randomizeList(array) {
 
 export function generateRepititions() {
     let rep = (Math.floor(Math.random() * (8 - 2)) + 2)
-    return rep % 2 == 0 ? rep : rep + 1
+    return rep % 2 === 0 ? rep : rep + 1
 }
 
 
