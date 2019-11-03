@@ -1,3 +1,8 @@
+/* 
+TODO: Fix color of Add Move Dropdown Item
+TODO: Extract Add Move Modal 
+*/
+
 import React from 'react';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';

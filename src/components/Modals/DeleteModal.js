@@ -8,6 +8,8 @@ import {
     Form,
   } from "reactstrap";
 
+import './styles/Modal.scss';
+
 
 export default class DeleteModal extends React.Component {
   constructor(props) {
@@ -43,7 +45,7 @@ export default class DeleteModal extends React.Component {
         <Modal isOpen={isOpen} toggle={close}>
           <ModalHeader toggle={close}>Delete {label}</ModalHeader>
           <ModalBody>
-            <Form>
+            <Form className="form-text">
               Are you sure you want to delete {label}?
             </Form>
           </ModalBody>

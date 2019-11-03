@@ -23,11 +23,11 @@ export default function NavBar(props) {
                         <DropdownToggle color="F35860">
                           <span className="dance-moves-dropdown-button">Dance Moves</span>
                         </DropdownToggle>
-                        <DropdownMenu right color="danceMovesDropdownMenuItem">
-                        <DropdownItem>
-                            <Link to="/">View List</Link>
-                        </DropdownItem>
-                        {props.renderAddModal()}
+                        <DropdownMenu right color="F35860">
+                            <DropdownItem>
+                                <Link to="/">View List</Link>
+                            </DropdownItem>
+                            {props.renderAddModal()}
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <UncontrolledDropdown >

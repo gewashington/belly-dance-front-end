@@ -11,6 +11,8 @@ import {
     Label,
   } from "reactstrap";
 
+import './styles/Modal.scss';
+
 
 export default class EditDanceMoveModal extends React.Component {
   constructor(props) {
@@ -63,11 +65,11 @@ export default class EditDanceMoveModal extends React.Component {
       <React.Fragment>
         <Button onClick={this.toggle}>{label}</Button>
         <Modal isOpen={modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>{label}</ModalHeader>
+          <ModalHeader className="modal-header" toggle={this.toggle}>{label}</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="title">Name</Label>
+                <Label className="label" for="title">Name</Label>
                 <Input
                   type="text"
                   name="name"
@@ -77,7 +79,7 @@ export default class EditDanceMoveModal extends React.Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="description">Description</Label>
+                <Label className="label" for="description">Description</Label>
                 <Input
                   type="text"
                   name="description"

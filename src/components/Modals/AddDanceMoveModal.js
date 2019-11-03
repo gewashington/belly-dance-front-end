@@ -11,6 +11,8 @@ import {
     Label,
   } from "reactstrap";
 
+import './styles/Modal.scss';
+
 
 export default class AddDanceMoveModal extends React.Component {
   constructor(props) {
@@ -66,7 +68,7 @@ export default class AddDanceMoveModal extends React.Component {
           <ModalBody>
             <Form>
               <FormGroup>
-                <Label for="title">Name</Label>
+                <Label className="label" for="title">Name</Label>
                 <Input
                   type="text"
                   name="name"
@@ -76,7 +78,7 @@ export default class AddDanceMoveModal extends React.Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="description">Description</Label>
+                <Label className="label" for="description">Description</Label>
                 <Input
                   type="text"
                   name="description"

@@ -1,19 +1,22 @@
 // @import 'bootstrap/scss/bootstrap.scss';
 
 $body-bg: #F35860;
-// $body-color: white;
+$body-color: white;
 
 $theme-colors: (
   "primary": #F35860,
-  "secondary": purple,
-  "dark": purple,
-  // "danger": #b536ff
+  "secondary": #F35860,
+  "success": #F35860,
+  "danger": #F35860,
   );
   
-// $colors: (  
-//     "gray": purple,
-//     "gray-dark": purple,
-// ) !default;
+  $colors: (  
+    "primary":#F35860,
+    "success": #F35860,
+    "danger": #F35860,
+    // "gray": purple,
+    // "gray-dark": purple,
+) !default;
 
 
 @import "node_modules/bootstrap/scss/bootstrap";
@@ -22,5 +25,11 @@ $theme-colors: (
 @each $color, $value in $theme-colors {
   .alert-#{$color} {
     @include alert-variant(theme-color-level($color), theme-color-level($color, -9), theme-color-level($color, -9));
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .button-#{$color} {
+    @include button-variant(theme-color-level($color), theme-color-level($color), theme-color-level($color));
   }
 }
