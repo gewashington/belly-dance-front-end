@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import EditDanceMoveModal from './Modals/EditDanceMoveModal';
 import DeleteModal from './Modals/DeleteModal';
-import './styles/BellyDanceMoveList.scss'
+import styles from './styles/BellyDanceMoveList.scss'
 
 /*
 ! Fix Delete Move Function
@@ -68,20 +68,13 @@ export default class BellyDanceMoveList extends React.Component {
 
       renderCard(danceMove) {
         return(
-            <Card key={danceMove.id}>
-              <CardTitle>{danceMove.name}</CardTitle>
-              <CardBody>
+            <Card key={danceMove.id} style={cardStyle}>
+              <CardTitle className="card-title">{danceMove.name}</CardTitle>
+              <CardBody className="card-body">
                 <CardText>
                   {danceMove.description ? danceMove.description : 'No description available'}
                 </CardText>
                 <div className="button-container">
-                  <div className="button">
-                    <Button 
-                      onClick={this.handleAddToRoutineButton}
-                    >
-                      Add To Routine
-                    </Button>
-                  </div>
                   <div className="button">
                     <EditDanceMoveModal danceMove={danceMove} onSave={this.handleEditDanceMove} label={`Edit`} />
                   </div>
@@ -122,7 +115,7 @@ export default class BellyDanceMoveList extends React.Component {
       render() {
 
           return(
-              <div>
+              <div className="card-container">
                 {this.state.danceMoveList.map((danceMove) => 
                 this.renderCard(danceMove))}
               </div>
@@ -130,4 +123,10 @@ export default class BellyDanceMoveList extends React.Component {
       }
 
 
+}
+
+const cardStyle = {
+  "width": "300px",
+  "backgroundColor": "#F35860",
+  "borderColor": "white"
 }

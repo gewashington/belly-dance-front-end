@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap');
+
+.container-wrapper {
+    display: flex;
+    flex-direction: column; 
+}
+
+.nav-bar {
+    /* background-color: #F35860; */
+    /* color: white; */
+    font-family: 'Yanone Kaffeesatz';
+}
+
+.dance-moves-dropdown-button {
+    color: white; 
+}
+
+.danceMovesDropdownMenuItem {
+    background-color: #F35860;
+    color: white;
+}

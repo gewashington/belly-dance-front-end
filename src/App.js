@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Route, Switch } from 'react-router-dom';
-import { DropdownItem } from 'reactstrap';
+import { Alert, DropdownItem } from 'reactstrap';
 
 import AddDanceModal from './components/Modals/AddDanceMoveModal';
 import BellyDancemoveList from './components/BellyDanceMoveList';
@@ -73,9 +73,12 @@ export default class App extends React.Component {
 
   render() {
     return(
-      <div className="container-wrapper">
+      <div className="container">
+         {/* <Alert color="primary">
+          Testing alert to test CSS
+        </Alert> */}
         <NavBar renderAddModal={this.renderAddModal} />
-        <div className="container">
+        <div>
             <React.Fragment>
               <Switch>
                 <Route exact path="/" component={BellyDancemoveList}/>

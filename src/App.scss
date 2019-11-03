@@ -1,12 +1,12 @@
+// @import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap');
+
 .container-wrapper {
     display: flex;
-    flex-direction: column;
-    
 }
 .container {
     margin-top: 12px;
-    height: 75%;
     max-width: 90%;
+    flex-direction: column; 
     display: flex;
     flex-wrap: wrap;
 }

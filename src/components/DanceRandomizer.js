@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Button, FormGroup, Input, Label, Table } from 'reactstrap';
 import { randomizeList, generateRepititions } from '../utils/helpers';
+
+import './styles/DanceRandomizer.scss';
 /*
 TODO: Allow user to enter any number of moves. This would reuse certain moves.
 TODO: Allow user to delete move from list.
@@ -52,7 +54,7 @@ export default class DanceRandomizer extends React.Component {
 
     renderForm() {
         return (
-            <React.Fragment>
+            <div className="form">
                  <FormGroup>
                  <Label for="numberOfMoves">Enter How Many Moves</Label>
                     <Input
@@ -68,38 +70,40 @@ export default class DanceRandomizer extends React.Component {
                   onClick={() => this.onRandomizeClick()}>
                   Randomize
                 </Button>
-            </React.Fragment>
+            </div>
         );
     }
 
     renderDanceMoveTable() {
         const { randomizedDanceList } = this.state;
         return (
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Order</th>
-                        <th>Dance Move</th>
-                        <th>Repetitions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {randomizedDanceList.map((danceMove, index) => (
-                            <tr key={danceMove.id}>
-                                <th scope="row">{index + 1}</th>
-                                <td>{danceMove.name}</td>
-                                <td>{generateRepititions()}</td>
-                            </tr>
-                    ))}
-                </tbody>
-            </Table>
+            <div className="table">
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Dance Move</th>
+                            <th>Repetitions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {randomizedDanceList.map((danceMove, index) => (
+                                <tr key={danceMove.id}>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{danceMove.name}</td>
+                                    <td>{generateRepititions()}</td>
+                                </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
         )
     }
 
     render() {
         const {randomizedDanceList} = this.state;
         return(
-            <div>
+            <div className="container">
                 {this.renderForm()}
                 {randomizedDanceList.length > 0 && this.renderDanceMoveTable()}
             </div>

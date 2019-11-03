@@ -1,11 +1,29 @@
 /*
 Background color: #FA3138
-*/
+*/@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap');
 
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
-.card {
-    width: 40%;
-    margin: 0 12px 12px 0;
+// .cardContainer {
+//     width: 300px;
+//     // margin: 0 12px 12px 0;
+//     background-color: #F35860;
+// }
+
+.card-title, .card-body {
+  background-color: #F35860;
+  color: white;
+  padding: 12px;
+  font-family: 'Yanone Kaffeesatz';
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .button-container {
