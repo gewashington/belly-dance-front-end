@@ -55,10 +55,11 @@ export default class DanceRandomizer extends React.Component {
     }
 
     renderForm() {
+        const { danceMoveList } = this.state;
         return (
             <div className="form">
                  <FormGroup>
-                 <Label for="numberOfMoves">Enter How Many Moves</Label>
+                 <Label for="numberOfMoves">Number of Moves (Enter between 1 - {danceMoveList.length}):</Label>
                     <Input
                     type="number"
                     name="number"

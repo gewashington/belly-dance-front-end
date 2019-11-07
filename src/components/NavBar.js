@@ -9,14 +9,18 @@ import {
     UncontrolledDropdown,
 } from 'reactstrap';
 
-import styles from './styles/NavBar.css'
+import styles from './styles/NavBar.scss'
 
 export default function NavBar(props) {
         return(
             <div className="container-wrapper">
                 <Navbar className="nav-bar">
                     <NavbarBrand className="nav-brand">
-                      Belly Dance Moves
+                      <Link to="/"> 
+                        <span className="title">
+                          Belly Dance Moves
+                        </span>
+                      </Link>
                     </NavbarBrand> 
                     <div className="dropdown-container">
                     <UncontrolledDropdown>
