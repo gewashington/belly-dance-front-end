@@ -9,12 +9,14 @@ import styles from './styles/BellyDanceMoveList.scss'
 */
 
 import { 
-    Button, 
+    // Button, 
     Card, 
     CardBody,
     CardTitle, 
     CardText, 
     } from 'reactstrap';
+
+import Button from './styled_components/Button';
 
 export default class BellyDanceMoveList extends React.Component {
     constructor(props) {
@@ -100,7 +102,7 @@ export default class BellyDanceMoveList extends React.Component {
     
         return(
           <React.Fragment>
-            <Button onClick={open}>Delete</Button>
+            <Button primary onClick={open}>Delete</Button>
             <DeleteModal 
               isOpen={this.state.deleteDanceModalOpen} 
               close={close} 

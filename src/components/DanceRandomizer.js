@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, FormGroup, Input, Label, Table } from 'reactstrap';
+import { FormGroup, Input, Label, Table } from 'reactstrap';
+import Button from './styled_components/Button';
 import { randomizeList, generateRepititions } from '../utils/helpers';
 
 import './styles/DanceRandomizer.scss';
@@ -67,7 +68,7 @@ export default class DanceRandomizer extends React.Component {
                     />                
                  </FormGroup>
                 <Button 
-                  color="primary"
+                  primary
                   onClick={() => this.onRandomizeClick()}>
                   Randomize
                 </Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Button,
+
     Modal,
     ModalHeader,
     ModalBody,
@@ -10,6 +10,8 @@ import {
     Input,
     Label,
   } from "reactstrap";
+
+import Button from '../styled_components/Button';
 
 import './styles/Modal.scss';
 
@@ -63,7 +65,7 @@ export default class EditDanceMoveModal extends React.Component {
 
     return (
       <React.Fragment>
-        <Button onClick={this.toggle}>{label}</Button>
+        <Button primary onClick={this.toggle}>{label}</Button>
         <Modal isOpen={modal} toggle={this.toggle}>
           <ModalHeader className="modal-header" toggle={this.toggle}>{label}</ModalHeader>
           <ModalBody>
