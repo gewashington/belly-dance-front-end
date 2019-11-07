@@ -36,6 +36,7 @@ export default class DanceRandomizer extends React.Component {
     }
 
     onNumberChange = (e) => {
+        e.preventDefault();
         this.setState({
             number: e.target.value,
         })
